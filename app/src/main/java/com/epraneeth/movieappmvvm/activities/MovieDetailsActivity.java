@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.epraneeth.movieappmvvm.R;
+import com.epraneeth.movieappmvvm.models.Movie;
 
 public class MovieDetailsActivity extends AppCompatActivity {
 
@@ -28,12 +29,15 @@ public class MovieDetailsActivity extends AppCompatActivity {
         voteAverage = findViewById(R.id.movie_details_vote_average);
         overview = findViewById(R.id.movie_details_overview);
         movieImage = findViewById(R.id.movie_details_image);
-        Intent intent = getIntent();
-        originalTitle.setText(intent.getStringExtra("original_title"));
-        voteAverage.setText(intent.getStringExtra("vote_average"));
-        overview.setText(intent.getStringExtra("overview"));
+
+        //Intent and set data in view
+        Movie movie = (Movie)getIntent().getSerializableExtra("serializedMovie");
+        originalTitle.setText(movie.getOriginal_title());
+        voteAverage.setText(String.valueOf(movie.getVote_average()));
+        overview.setText(movie.getOverview());
         Glide.with(this)
-                .load("https://image.tmdb.org/t/p/w500" + intent.getStringExtra("backdrop_path"))
+                .load("https://image.tmdb.org/t/p/w500" + movie.getBackdrop_path())
+                .placeholder(R.drawable.ic_launcher_foreground)
                 .into(movieImage);
     }
 }

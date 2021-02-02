@@ -1,7 +1,9 @@
 package com.epraneeth.movieappmvvm.models;
 
 
-public class Movie {
+import java.io.Serializable;
+
+public class Movie implements Serializable {
     private String original_title;
     private String backdrop_path;
     private String poster_path;

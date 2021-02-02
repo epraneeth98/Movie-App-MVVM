@@ -1,4 +1,4 @@
-package com.epraneeth.movieappmvvm.adapters;
+package com.epraneeth.movieappmvvm.helpers;
 
 import android.view.View;
 import android.widget.ImageView;

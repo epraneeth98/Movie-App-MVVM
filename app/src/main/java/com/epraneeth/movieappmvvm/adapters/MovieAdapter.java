@@ -3,6 +3,7 @@ package com.epraneeth.movieappmvvm.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.epraneeth.movieappmvvm.R;
 import com.epraneeth.movieappmvvm.activities.MovieDetailsActivity;
+import com.epraneeth.movieappmvvm.helpers.MovieViewHolder;
 import com.epraneeth.movieappmvvm.models.Movie;
 
 import java.util.ArrayList;
@@ -47,13 +49,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieViewHolder> {
         Log.d("abc", "In bindViewHolder: "+String.valueOf(mList.size()));
         Glide.with(mContext)
                 .load("https://image.tmdb.org/t/p/w500" + movie.getPoster_path())
+                .placeholder(R.drawable.ic_launcher_foreground)
                 .into(holder.imageView);
         holder.imageView.setOnClickListener(v -> {
             Intent intent = new Intent(mContext, MovieDetailsActivity.class);
-            intent.putExtra("original_title", movie.getOriginal_title());
-            intent.putExtra("overview", movie.getOverview());
-            intent.putExtra("backdrop_path", movie.getBackdrop_path());
-            intent.putExtra("vote_average", movie.getVote_average().toString());
+            intent.putExtra("serializedMovie", movie);
             mContext.startActivity(intent);
         });
     }
